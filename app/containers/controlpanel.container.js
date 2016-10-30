@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
 	ListView,
 	StyleSheet,
@@ -11,21 +12,29 @@ import {
 // import modules
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export default class ControlPanel extends Component {
+var dataSource = new ListView.DataSource({
+	rowHasChanged: (r1, r2) => r1 !== r2,
+	sectionHeaderHasChanged: (s1, s2) => s1 !== s2
+});
+
+class ControlPanel extends Component {
 	constructor(props) {
 		super(props);
 
-		var dataSource = new ListView.DataSource({
-			rowHasChanged: (r1, r2) => r1 !== r2,
-			sectionHeaderHasChanged: (s1, s2) => s1 !== s2
-		});
-
-		this.state = {
-			dataSource: dataSource.cloneWithRowsAndSections(items)
+		this.state ={
+			dataSource: []
 		};
   	}
 
+  	componentWillMount(){
+		this.setState({
+			dataSource: dataSource.cloneWithRowsAndSections(this.props.channels)
+		});
+  	}
+
 	render() {
+		console.log('render');
+
 		return (
 			<View style={styles.container}>
 				<View style={{ padding: 15, paddingBottom: 0 }}>
@@ -64,18 +73,20 @@ export default class ControlPanel extends Component {
 		const style = row.unread == true ? styles.sectionItemUnread : styles.sectionItemRead;
 
 	    return (
-	    	<TouchableHighlight style={styles.rowClick} underlayColor="#FFFFFF" disabled={true}>
+	    	<TouchableHighlight style={styles.rowClick}>
 	      		<Text style={style}>#  {row.name}</Text>
       		</TouchableHighlight>
 	    )
 	}
 }
 
-var items = {
-	UNREADS: [{name: 'general', unread: true}, {name: 'random', unread: true}, {name: 'react-program', unread: true}, {name: 'react-native', unread: true}],
-	CHANNELS: [{name: 'react-jobs'}, {name: 'react-jobs'}],
-	'DIRECT MESSAGE': [{name: 'slackbot'}, {name: 'your name (you)'}]
-};
+const mapStateToProps = (state) => {
+	return {
+		channels: state.channels
+	};
+}
+
+export default connect(mapStateToProps)(ControlPanel);
 
 const styles = StyleSheet.create({
 	container: {
