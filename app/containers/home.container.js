@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import { 
 	StyleSheet,
 	TouchableOpacity,
@@ -14,10 +16,10 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // import components
+import NavApp from '../components/navigator.component';
 import FeedList from '../components/feed.list.component';
 import Channel from '../components/channel.component';
-
-import NavApp from '../components/navigator.component';
+import InputMessage from '../components/input.message.component';
 
 const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -48,7 +50,7 @@ class HomeContainer extends Component {
 						<Image style={styles.logo} source={require('../resources/freepik.jpg')} />
 					</TouchableOpacity>
 
-					<Text style={styles.title}>TechMasters</Text>
+					<Text style={styles.title}>SlackNative</Text>
 
 					<View style={styles.icons}>
 						<Icon name="search" color="#fff" size={25} />
@@ -62,16 +64,8 @@ class HomeContainer extends Component {
 					dataSource={this.state.dataSource}
 					renderRow={this.renderRow.bind(this)} />
 
-				<View style={ styles.contentMessage }>
-					<Icon name="tag-faces" size={22} color="#777" />
-					<TextInput 
-						style={ styles.input }
-						underlineColorAndroid="transparent"
-						placeholder="Message #general"
-						placeholderTextColor="#ccc"/>
-					<Icon name="send" size={22} color="#777" />
+				<InputMessage />
 
-				</View>
 			</View>
 		);
 	}
@@ -107,24 +101,5 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		marginRight: 5
-	},
-	contentMessage: {
-		padding: 5, 
-		paddingLeft: 15,
-		paddingRight: 15,
-		backgroundColor: '#fff',
-		borderTopWidth: 1,
-		borderTopColor: '#eee',
-		justifyContent: 'space-around',
-		flexDirection: 'row',
-		alignItems: 'center'		
-	},
-	input: {
-		flex: 1,
-		fontSize: 16,
-		height: 40, 
-		marginLeft: 10, 
-		marginRight: 10,
-		borderBottomWidth: 0
 	}
 });
