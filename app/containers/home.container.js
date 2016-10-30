@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { 
 	StyleSheet,
 	TouchableOpacity,
@@ -15,19 +16,24 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 // import components
 import FeedList from '../components/feed.list.component';
 import Channel from '../components/channel.component';
-import MessageList from '../resources/fake/messages';
 
 import NavApp from '../components/navigator.component';
 
-export default class HomeView extends Component {
+const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+class HomeContainer extends Component {
 	constructor(props) {
 		super(props);
 
-		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-		
-		this.state = {
-	      dataSource: ds.cloneWithRows(MessageList)
-	    };
+		this.state ={
+			dataSource: []
+		};
+	}
+
+	componentWillMount() {
+		this.setState ({
+			dataSource: dataSource.cloneWithRows(this.props.messages)
+		})
 	}
 
 	renderRow(row) {
@@ -70,6 +76,14 @@ export default class HomeView extends Component {
 		);
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		messages: state.messages
+	};
+}
+
+export default connect(mapStateToProps)(HomeContainer);
 
 const styles = StyleSheet.create({
 	container: {	
