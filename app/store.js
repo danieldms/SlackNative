@@ -5,9 +5,7 @@ import logger from 'redux-logger';
 import Reducers from './reducers/';
 
 const store = createStore(
-	Reducers,
-	{},
-	applyMiddleware(logger)
+	Reducers
 );
 
 export default store;

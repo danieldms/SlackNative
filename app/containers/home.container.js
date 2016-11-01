@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect } from  'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { 
+import {
 	StyleSheet,
 	TouchableOpacity,
 	ListView,
@@ -15,6 +15,9 @@ import {
 // import modules
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+// import action creators
+import * as actions from '../actions/creators/message';
+
 // import components
 import NavApp from '../components/navigator.component';
 import FeedList from '../components/feed.list.component';
@@ -26,10 +29,6 @@ const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2
 class HomeContainer extends Component {
 	constructor(props) {
 		super(props);
-
-		this.state ={
-			dataSource: []
-		};
 	}
 
 	componentWillMount() {
@@ -38,11 +37,19 @@ class HomeContainer extends Component {
 		})
 	}
 
+	componentWillReceiveProps(nextProps){
+	
+		this.setState ({
+			dataSource: this.state.dataSource.cloneWithRows(nextProps.messages)
+		})
+	}
+
 	renderRow(row) {
 		return <FeedList row={row} navigator={this.props.navigator}/>
 	}
 
 	render() {
+		console.log('render');
 		return (
 			<View style={styles.container}>
 				<NavApp>
@@ -64,7 +71,7 @@ class HomeContainer extends Component {
 					dataSource={this.state.dataSource}
 					renderRow={this.renderRow.bind(this)} />
 
-				<InputMessage />
+				<InputMessage addMessage={this.props.addMessage} />
 
 			</View>
 		);
@@ -77,10 +84,14 @@ const mapStateToProps = (state) => {
 	};
 }
 
-export default connect(mapStateToProps)(HomeContainer);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
 
 const styles = StyleSheet.create({
-	container: {	
+	container: {
 		flex: 1
 	},
 	logo: {

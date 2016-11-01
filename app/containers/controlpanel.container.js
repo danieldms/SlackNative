@@ -33,8 +33,6 @@ class ControlPanel extends Component {
   	}
 
 	render() {
-		console.log('render');
-
 		return (
 			<View style={styles.container}>
 				<View style={{ padding: 15, paddingBottom: 0 }}>
