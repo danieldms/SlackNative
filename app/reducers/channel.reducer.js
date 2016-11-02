@@ -25,7 +25,7 @@ const Reducer = (state=initial, action) => {
 		case 'SET_ACTIVE':
 			state = {
 				...state,
-				active: action.playload
+				active: action.channel
 			}
 	}
 

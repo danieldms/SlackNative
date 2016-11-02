@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import {
 	ListView,
 	StyleSheet,
 	TextInput,
-	TouchableHighlight,
+	TouchableOpacity,
 	View,
 	Text
 } from 'react-native';
 
 // import modules
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+// import action creators
+import * as actions from '../actions/creators/channel';
 
 var dataSource = new ListView.DataSource({
 	rowHasChanged: (r1, r2) => r1 !== r2,
@@ -24,6 +29,8 @@ class ControlPanel extends Component {
 		this.state ={
 			dataSource: []
 		};
+
+		this.renderRow = this.renderRow.bind(this);
   	}
 
   	componentWillMount(){
@@ -32,6 +39,13 @@ class ControlPanel extends Component {
 		});
   	}
 
+	componentWillReceiveProps(nextProps){
+		this.setState({
+			dataSource: dataSource.cloneWithRowsAndSections(nextProps.channels)
+		});
+		
+		this.props.closePanel();
+  	}
 	render() {
 		return (
 			<View style={styles.container}>
@@ -61,7 +75,7 @@ class ControlPanel extends Component {
 
 	renderSectionHeader(sectionItems, section) {
 	  	return (
-	  		<View style={ styles.sectionHeaderContent }>
+	  		<View style={styles.sectionHeaderContent}>
 	    		<Text style={styles.sectionHeader}>{section}</Text>
 	    	</View>
 	  	)
@@ -69,22 +83,27 @@ class ControlPanel extends Component {
 
 	renderRow(row) {
 		const style = row.unread == true ? styles.sectionItemUnread : styles.sectionItemRead;
+		const active = this.props.active == row.name ? styles.active : '';
 
 	    return (
-	    	<TouchableHighlight style={styles.rowClick}>
+	    	<TouchableOpacity style={[styles.rowClick, active]} onPress={()=> {this.props.setActive(row.name)}}>
 	      		<Text style={style}>#  {row.name}</Text>
-      		</TouchableHighlight>
+      		</TouchableOpacity>
 	    )
 	}
 }
 
 const mapStateToProps = (state) => {
 	return {
-		channels: state.channels.list
+		channels: state.channels.list,
+		active: state.channels.active
 	};
 }
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators(actions, dispatch);
+}
 
-export default connect(mapStateToProps)(ControlPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(ControlPanel);
 
 const styles = StyleSheet.create({
 	container: {
@@ -146,5 +165,8 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		marginBottom: 10,
 		justifyContent: 'space-between'
+	},
+	active: {
+		backgroundColor: '#34123050'
 	}
 });

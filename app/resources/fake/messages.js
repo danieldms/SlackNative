@@ -1,6 +1,5 @@
 
 // Fake user list
-
 const messages = {
 	'general': [
 		{ uid: '8f1d29', time: '05:12 AM', message: 'Bacon ipsum dolor amet venison cow porchetta biltong, salami doner sausage ribeye jerky landjaeger sirloin ball tip ham.' },
@@ -27,7 +26,7 @@ const messages = {
 		{ uid: '8g1d29', time: '13:20 PM', message: 'Ball tip kevin turducken shank, jerky brisket alcatra corned beef flank. Pork loin salami pastrami picanha turducken. Pancetta flank bacon frankfurter fatback andouille' },
 		{ uid: '8g1d29', time: '13:20 PM', message: 'Brisket tenderloin beef ribs bresaola shankle doner cow'}
 	],
-	'react-native': [
+	'random': [
 		{ uid: '8f1d29', time: '05:12 AM', message: 'Bacon ipsum dolor amet venison cow porchetta biltong, salami doner sausage ribeye jerky landjaeger sirloin ball tip ham.' },
 		{ uid: '8f1d30', time: '05:13 AM', message: 'Jowl chicken short loin, shoulder cow porchetta andouille tri-tip venison chuck frankfurter. ' },
 		{ uid: '8f1d31', time: '05:18 AM', message: 'Chuck andouille turkey ground round shankle biltong kielbasa filet mignon doner pork belly. ' },

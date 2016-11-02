@@ -29,18 +29,21 @@ const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2
 class HomeContainer extends Component {
 	constructor(props) {
 		super(props);
+
+		this.fetchData = this.fetchData.bind(this);
 	}
 
 	componentWillMount() {
-		this.setState ({
-			dataSource: dataSource.cloneWithRows(this.props.messages)
-		})
+		this.fetchData(this.props.messages);
 	}
 
 	componentWillReceiveProps(nextProps){
+		this.fetchData(nextProps.messages);
+	}
 
+	fetchData(data) {
 		this.setState ({
-			dataSource: this.state.dataSource.cloneWithRows(nextProps.messages)
+			dataSource: dataSource.cloneWithRows(data)
 		})
 	}
 
@@ -49,7 +52,7 @@ class HomeContainer extends Component {
 	}
 
 	render() {
-		console.log('render');
+
 		return (
 			<View style={styles.container}>
 				<NavApp>

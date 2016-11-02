@@ -39,7 +39,9 @@ export default class Application extends Component {
 	_renderScene(route, navigator) {
 		switch(route.id) {
 			case 'home':
-				return ( <Home openPanel={() => { this.openControlPanel() }} navigator={navigator} />);
+				return ( <Home
+                            openPanel={() => { this.openControlPanel() }}
+                            navigator={navigator} />);
 				break;
 			case 'detail-message':
 				return ( <DetailMessage openPanel={() => { this.openControlPanel() }} navigator={navigator} />);
@@ -56,7 +58,9 @@ export default class Application extends Component {
 					openDrawerOffset={0.2}
 					styles={drawerStyles}
 					ref={(ref) => this._drawer = ref}
-			        content={<ControlPanel onPress = {() => this.closeControlPanel()} />}
+			        content={<ControlPanel
+                                onPress = {() => this.closeControlPanel()} 
+                                closePanel={() => { this.closeControlPanel() }} />}
 			        >
 						<Navigator
 							initialRoute={{id: "home"}}
