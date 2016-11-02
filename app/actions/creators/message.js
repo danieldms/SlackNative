@@ -1,7 +1,7 @@
-export const addMessage = (message) => {
-	console.log(message);
+export const addMessage = (message, channel) => {
 	return {
 		type: "ADD_MESSAGE",
-		playload: message
+		message,
+		channel
 	}
 }

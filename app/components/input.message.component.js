@@ -20,7 +20,8 @@ export default class InputMessage extends Component {
 
 	sendMessage() {
 		const message = this.state.message;
-		this.props.addMessage(message);
+		this.props.addMessage(message, this.props.channel);
+
 		this.setState({
 			message: ''
 		});

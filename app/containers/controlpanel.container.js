@@ -42,14 +42,14 @@ class ControlPanel extends Component {
 					</View>
 					<View style={[styles.jumpTo, styles.row]}>
 						<Icon name='search' size={20} color="#fff"/>
-						<TextInput 
+						<TextInput
 							style={styles.input}
 							placeholderTextColor="#8C6F88"
 							underlineColorAndroid="transparent"
 							placeholder="Jump" />
 					</View>
 				</View>
-				
+
 				<ListView
 		            dataSource={this.state.dataSource}
 		            renderRow={this.renderRow}
@@ -80,7 +80,7 @@ class ControlPanel extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		channels: state.channels
+		channels: state.channels.list
 	};
 }
 
@@ -98,9 +98,9 @@ const styles = StyleSheet.create({
 		color: '#fff'
 	},
 	sectionHeaderContent: {
-		borderBottomWidth: 1, 
-		borderBottomColor: '#38173430', 
-		backgroundColor: '#52374f', 
+		borderBottomWidth: 1,
+		borderBottomColor: '#38173430',
+		backgroundColor: '#52374f',
 		padding: 5,
 		paddingTop: 20
 	},
@@ -125,15 +125,15 @@ const styles = StyleSheet.create({
 		fontSize: 16
 	},
 	rowClick: {
-		justifyContent: 'flex-start', 
-		flexDirection: 'row', 
+		justifyContent: 'flex-start',
+		flexDirection: 'row',
 		paddingLeft: 15
 	},
 	jumpTo: {
 		marginTop: 10,
 		paddingLeft: 10,
 		borderRadius: 5,
-		backgroundColor: '#341230' 
+		backgroundColor: '#341230'
 	},
 	input: {
 		flex: 1,

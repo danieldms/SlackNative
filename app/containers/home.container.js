@@ -38,7 +38,7 @@ class HomeContainer extends Component {
 	}
 
 	componentWillReceiveProps(nextProps){
-	
+
 		this.setState ({
 			dataSource: this.state.dataSource.cloneWithRows(nextProps.messages)
 		})
@@ -65,13 +65,13 @@ class HomeContainer extends Component {
 					</View>
 				</NavApp>
 
-				<Channel name="general" />
+				<Channel name={this.props.active} />
 
 				<ListView style={{ flex: 1 }}
 					dataSource={this.state.dataSource}
 					renderRow={this.renderRow.bind(this)} />
 
-				<InputMessage addMessage={this.props.addMessage} />
+				<InputMessage addMessage={this.props.addMessage} channel={this.props.active} />
 
 			</View>
 		);
@@ -80,7 +80,8 @@ class HomeContainer extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		messages: state.messages
+		messages: state.messages[state.channels.active],
+		active: state.channels.active
 	};
 }
 
