@@ -19,3 +19,7 @@ Feel free to download or clone the source code:
 
 ### Fake images ###
 - [https://randomuser.me/](https://randomuser.me/)
+
+### Screenshot ###
+![main](https://www.dropbox.com/s/kgj78ubjmrmpus5/slide-main.png?dl=0)
+![menu](https://www.dropbox.com/s/f7rccwhz477icwh/slide-menu.png?dl=0)
