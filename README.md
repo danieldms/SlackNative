@@ -21,5 +21,5 @@ Feel free to download or clone the source code:
 - [https://randomuser.me/](https://randomuser.me/)
 
 ### Screenshot ###
-![main](https://raw.githubusercontent.com/danieldms/SlackNative/screeshots/slide-main.png?raw=true)
-![menu](https://raw.githubusercontent.com/danieldms/SlackNative/screeshots/slide-menu.png?raw=true)
+![main](https://raw.githubusercontent.com/danieldms/SlackNative/master/screenshots/slide-main.png)
+![menu](https://raw.githubusercontent.com/danieldms/SlackNative/master/screenshots/slide-menu.png)
